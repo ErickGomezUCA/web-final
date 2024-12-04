@@ -24,7 +24,9 @@ export default function TableView() {
       await createTask({ title: 'New Task' });
       message.success('New task created successfully!');
     } catch (e) {
-      message.error(e.message || "Couldn't create a new task. Please try again.");
+      message.error(
+        e.message || "Couldn't create a new task. Please try again."
+      );
     }
   };
 
@@ -53,7 +55,7 @@ export default function TableView() {
       title: 'Due Date',
       dataIndex: 'date',
       key: 'date',
-      render: (date) => date.split('T')[0],
+      render: (date) => date?.split('T')[0],
       width: 100,
     },
     {
