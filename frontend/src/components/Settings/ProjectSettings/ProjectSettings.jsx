@@ -8,18 +8,20 @@ import Title from 'antd/es/typography/Title';
 import { projectNameRules } from '../../../helpers/forms/userSettingsDialogValidation';
 import useFetchData from '../../../hooks/useFetchData';
 import usePutData from '../../../hooks/usePutData';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../context/auth/AuthContext';
 
 export default function ProjectSettings() {
   const { token } = useContext(AuthContext);
   const { projectId, workspaceId } = useParams();
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
-  const { data, loading, error } = useFetchData(
-    `projects/${projectId}/w/${workspaceId}`,
-    token
-  );
+  const {
+    data,
+    loading: fetchLoading,
+    error,
+  } = useFetchData(`projects/${projectId}/w/${workspaceId}`, token);
   const {
     putData,
     loading: updating,
@@ -60,13 +62,14 @@ export default function ProjectSettings() {
 
   const handleCancel = () => {
     if (data) {
-      setProjectName(data.title);
-      setSelectedIcon(data.icon);
+      // setProjectName(data.title);
+      // setSelectedIcon(data.icon);
     }
     setIsEditing({ projectName: false });
+    navigate(-1);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (fetchLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading project data: {error.message}</p>;
   if (!data) return null;
 

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import getHeaders from '../../helpers/api/header';
 
-// const socket = io(import.meta.env.VITE_SOCKET_URL);
+const socket = io(import.meta.env.VITE_SOCKET_URL);
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const useTasks = (projectId, token, initialTasks = []) => {

@@ -6,7 +6,7 @@ import './Tasks.scss';
 export default function Projects() {
   const [projects, setProjects] = useState([
     { id: 1, name: 'Project X', description: 'Description of Project X' },
-    { id: 2, name: 'Project Y', description: 'Description of Project Y' }
+    { id: 2, name: 'Project Y', description: 'Description of Project Y' },
   ]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
@@ -63,7 +63,7 @@ export default function Projects() {
           <List.Item
             actions={[
               <EditOutlined onClick={() => handleEdit(project)} />,
-              <DeleteOutlined onClick={() => handleDelete(project.id)} />
+              <DeleteOutlined onClick={() => handleDelete(project.id)} />,
             ]}
           >
             <List.Item.Meta
@@ -96,7 +96,9 @@ export default function Projects() {
           <Form.Item
             name="description"
             label="Project Description"
-            rules={[{ required: true, message: 'Please input project description' }]}
+            rules={[
+              { required: true, message: 'Please input project description' },
+            ]}
           >
             <Input />
           </Form.Item>

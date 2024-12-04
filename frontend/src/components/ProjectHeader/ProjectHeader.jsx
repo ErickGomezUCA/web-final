@@ -1,6 +1,6 @@
 import { Button, Divider, message, Spin, Tabs, Typography, App } from 'antd';
 import { useState, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   CalendarOutlined,
   LayoutOutlined,
@@ -21,11 +21,12 @@ const { Title } = Typography;
 
 export default function ProjectHeader({ project }) {
   const [activeTab, setActiveTab] = useState('1');
-  const { projectId } = useParams();
+  const { workspaceId, projectId } = useParams();
   const { token } = useContext(AuthContext);
   const { saveTasks } = useContext(TaskContext);
   const { data, loading, error } = useFetchData(`tasks/p/${projectId}`, token);
   const { message } = App.useApp();
+  const navigate = useNavigate();
 
   // SocketIO
   const { tasks, fetchTasks } = useTasks(projectId, token);
@@ -109,7 +110,13 @@ export default function ProjectHeader({ project }) {
           </div>
           <div className="project-header-right">
             <div className="settings-button">
-              <Button icon={<MoreOutlined />} type="text" />
+              <Button
+                icon={<MoreOutlined />}
+                type="text"
+                onClick={() =>
+                  navigate(`/w/${workspaceId}/p/${projectId}/project-dialog`)
+                }
+              />
             </div>
           </div>
         </div>
