@@ -29,7 +29,6 @@ export default function ProjectSettings() {
 
   const [isEditing, setIsEditing] = useState({ projectName: false });
 
-  const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const handleEditClick = (field) => {

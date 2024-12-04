@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Input, Form, List, Modal, message } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import './Projects.scss';
+import './Tasks.scss';
 
 export default function Projects() {
   const [projects, setProjects] = useState([
