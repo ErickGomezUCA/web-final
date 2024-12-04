@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongodb:27017/taskspaces-db
+      JWT_SECRET: dksjfkdsfjlkdj
+      MAIL_HOST: smtp.gmail.com
+      MAIL_PORT: 587
+      MAIL_SECURE: false
+      MAIL_USER: taskspacesapp@gmail.com
+      MAIL_PASS: hleigcayczfwokya
+      MAIL_FROM_NAME: TaskSpaces
+      MAIL_FROM_EMAIL: taskspacesapp@gmail.com
+      FRONTEND_URL: http://localhost:5173
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
